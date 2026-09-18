@@ -22,7 +22,7 @@ export function Converse({ threadId = "welcome" }: { threadId?: string }) {
   const [newThreadId, setNewThreadId] = useState("new-conversation");
   const [thinking, setThinking] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>(() => [
-    { id: "welcome", role: "assistant", text: "Hi Samir — I’m Rami. I can help connect your financial plan with practical support for your business. Where would you like to begin?" },
+    { id: "welcome", role: "assistant", text: "Hi Omar — I’m your future self. I can help connect your financial plan with practical support for Prime Movers. Where would you like to begin?" },
     ...(starterPrompt ? [
       { id: "starter-user", role: "user" as const, text: starterPrompt },
       { id: "starter-answer", role: "assistant" as const, text: "That’s a useful place to start. I’d look at your goals, current cash flow, and the support programs you may qualify for, then turn those into a short action plan." },
@@ -50,20 +50,21 @@ export function Converse({ threadId = "welcome" }: { threadId?: string }) {
   };
 
   return (
-    <AppShell title="Good morning, Samir">
+    <AppShell title="Good morning, Omar">
       <section className="flex items-center justify-between px-5 py-2">
         <Button variant="ghost" size="sm" onClick={() => setDrawerOpen(true)} className="border border-ice/10 bg-glass text-slate hover:bg-glass-strong hover:text-ice"><Menu /> Threads</Button>
         <Link to="/chat/$threadId" params={{ threadId: newThreadId }} className="grid size-9 place-items-center rounded-md border border-ice/10 bg-glass text-cyan" aria-label="New conversation"><Plus className="size-4" /></Link>
       </section>
 
       <section className="mx-5 mt-2 flex min-h-[560px] flex-1 flex-col overflow-hidden rounded-lg border border-ice/12 bg-glass backdrop-blur-xl">
-        <div className="flex items-center gap-3 border-b border-ice/10 p-4">
-          <div className="relative shrink-0">
-            <img src={adviser} alt="Rami, your Future You adviser" width={816} height={816} className="size-14 rounded-lg object-cover" />
-            <span className="absolute bottom-0 right-0 size-3 rounded-full bg-cyan ring-2 ring-ink" />
+        <div className="relative flex min-h-64 flex-col items-center justify-end overflow-hidden border-b border-ice/10 px-5 pb-5 pt-6 text-center">
+          <div className="absolute inset-0 bg-gradient-to-b from-cyan/5 to-ink/65" />
+          <div className="relative">
+            <img src={adviser} alt="Your future self" width={816} height={816} className="size-40 rounded-lg object-cover object-top shadow-2xl ring-1 ring-ice/15" />
+            <span className="absolute bottom-2 right-2 size-3.5 rounded-full bg-cyan ring-2 ring-ink" />
           </div>
-          <div className="min-w-0"><p className="font-display text-sm font-semibold">Rami Khoury</p><p className="text-[11px] text-slate">Future You adviser</p></div>
-          <span className="ml-auto rounded-full border border-cyan/30 bg-cyan/10 px-2.5 py-1 text-[10px] font-semibold text-cyan">Online</span>
+          <div className="relative mt-3"><p className="font-display text-base font-semibold">Future You</p><p className="mt-0.5 text-[11px] text-slate">A conversation with who you’re becoming</p></div>
+          <span className="relative mt-2 rounded-full border border-cyan/30 bg-cyan/10 px-2.5 py-1 text-[10px] font-semibold text-cyan">Online</span>
         </div>
 
         <Conversation className="min-h-0 flex-1">
@@ -83,7 +84,7 @@ export function Converse({ threadId = "welcome" }: { threadId?: string }) {
 
         <div className="border-t border-ice/10 p-3">
           <PromptInput onSubmit={submit} className="[&_[data-slot=input-group]]:border-ice/12 [&_[data-slot=input-group]]:bg-ink/40">
-            <PromptInputTextarea ref={inputRef} placeholder="Ask Rami anything…" className="min-h-16 text-ice placeholder:text-slate" />
+            <PromptInputTextarea ref={inputRef} placeholder="Ask your future self anything…" className="min-h-16 text-ice placeholder:text-slate" />
             <PromptInputFooter className="justify-end pb-2 pt-0"><PromptInputSubmit status={thinking ? "submitted" : "ready"} disabled={thinking} className="bg-cyan text-ink hover:bg-cyan/90" /></PromptInputFooter>
           </PromptInput>
         </div>

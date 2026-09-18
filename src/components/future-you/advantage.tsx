@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
-import { benefits } from "@/lib/future-you-data";
+import { benefits, submissions } from "@/lib/future-you-data";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, ChevronRight, FileCheck2 } from "lucide-react";
+import { ArrowRight, ArrowUpRight, FileText } from "lucide-react";
 import { AppShell } from "./app-shell";
 
 export function Advantage() {
@@ -26,11 +26,19 @@ export function Advantage() {
       </section>
       <section className="mt-4 border-t border-ice/10 px-5 py-6">
         <p className="text-[10px] font-semibold uppercase tracking-[0.22em] text-slate">Your applications</p>
-        <Link to="/submissions" className="mt-3 flex items-center gap-3 rounded-lg border border-cyan/20 bg-cyan/10 p-4 backdrop-blur-xl">
-          <span className="grid size-11 place-items-center rounded-md bg-cyan/15 text-cyan"><FileCheck2 className="size-5" /></span>
-          <span className="min-w-0 flex-1"><strong className="block font-display text-sm font-semibold">My Benefit Submissions</strong><span className="mt-1 block text-[11px] text-slate">2 active applications</span></span>
-          <ChevronRight className="size-5 text-cyan" />
-        </Link>
+        <div className="mt-3 grid gap-3">
+          {submissions.map((item) => (
+            <Link key={item.id} to="/submissions/$submissionId" params={{ submissionId: item.id }} className="rounded-lg border border-ice/12 bg-glass p-4 backdrop-blur-xl">
+              <div className="flex items-start gap-3">
+                <span className="grid size-10 place-items-center rounded-md bg-cyan/10 text-cyan"><FileText className="size-5" /></span>
+                <span className="min-w-0 flex-1"><strong className="block font-display text-sm font-semibold">{item.name}</strong><span className="mt-1 block text-[10px] text-slate">{item.reference} · Updated {item.updated}</span></span>
+                <ArrowUpRight className="size-4 text-cyan" />
+              </div>
+              <div className="mt-4 h-1.5 overflow-hidden rounded-full bg-ice/10"><div className="h-full rounded-full bg-gradient-to-r from-cyan to-violet" style={{ width: `${item.progress}%` }} /></div>
+              <div className="mt-2 flex justify-between text-[10px]"><span className="text-slate">{item.progress}% complete</span><span className="font-semibold text-cyan">{item.status}</span></div>
+            </Link>
+          ))}
+        </div>
       </section>
     </AppShell>
   );
