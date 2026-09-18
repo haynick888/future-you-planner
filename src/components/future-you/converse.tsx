@@ -17,12 +17,16 @@ export function Converse({ threadId = "welcome" }: { threadId?: string }) {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [newThreadId, setNewThreadId] = useState("new-conversation");
   const [thinking, setThinking] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
     { id: "welcome", role: "assistant", text: "Hi Samir — I’m Rami. I can help connect your financial plan with practical support for your business. Where would you like to begin?" },
   ]);
 
-  useEffect(() => { inputRef.current?.focus(); }, [threadId, thinking]);
+  useEffect(() => {
+    setNewThreadId(crypto.randomUUID());
+    inputRef.current?.focus();
+  }, [threadId, thinking]);
 
   const submit = ({ text }: { text: string }) => {
     const clean = text.trim();
@@ -44,7 +48,7 @@ export function Converse({ threadId = "welcome" }: { threadId?: string }) {
     <AppShell title="Good morning, Samir">
       <section className="flex items-center justify-between px-5 py-2">
         <Button variant="ghost" size="sm" onClick={() => setDrawerOpen(true)} className="border border-ice/10 bg-glass text-slate hover:bg-glass-strong hover:text-ice"><Menu /> Threads</Button>
-        <Link to="/chat/$threadId" params={{ threadId: crypto.randomUUID() }} className="grid size-9 place-items-center rounded-md border border-ice/10 bg-glass text-cyan" aria-label="New conversation"><Plus className="size-4" /></Link>
+        <Link to="/chat/$threadId" params={{ threadId: newThreadId }} className="grid size-9 place-items-center rounded-md border border-ice/10 bg-glass text-cyan" aria-label="New conversation"><Plus className="size-4" /></Link>
       </section>
 
       <section className="mx-5 mt-2 flex min-h-[560px] flex-1 flex-col overflow-hidden rounded-lg border border-ice/12 bg-glass backdrop-blur-xl">
