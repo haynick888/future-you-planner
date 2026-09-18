@@ -10,33 +10,102 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdvantageRouteImport } from './routes/advantage'
+import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as ChatThreadIdRouteImport } from './routes/chat.$threadId'
+import { Route as SubmissionsIndexRouteImport } from './routes/submissions.index'
+import { Route as SubmissionsSubmissionIdRouteImport } from './routes/submissions.$submissionId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdvantageRoute = AdvantageRouteImport.update({
+  id: '/advantage',
+  path: '/advantage',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProfileRoute = ProfileRouteImport.update({
+  id: '/profile',
+  path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ChatThreadIdRoute = ChatThreadIdRouteImport.update({
+  id: '/chat/$threadId',
+  path: '/chat/$threadId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubmissionsIndexRoute = SubmissionsIndexRouteImport.update({
+  id: '/submissions/',
+  path: '/submissions/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubmissionsSubmissionIdRoute = SubmissionsSubmissionIdRouteImport.update({
+  id: '/submissions/$submissionId',
+  path: '/submissions/$submissionId',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/advantage': typeof AdvantageRoute
+  '/profile': typeof ProfileRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
+  '/submissions/$submissionId': typeof SubmissionsSubmissionIdRoute
+  '/submissions/': typeof SubmissionsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/advantage': typeof AdvantageRoute
+  '/profile': typeof ProfileRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
+  '/submissions/$submissionId': typeof SubmissionsSubmissionIdRoute
+  '/submissions': typeof SubmissionsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/advantage': typeof AdvantageRoute
+  '/profile': typeof ProfileRoute
+  '/chat/$threadId': typeof ChatThreadIdRoute
+  '/submissions/$submissionId': typeof SubmissionsSubmissionIdRoute
+  '/submissions/': typeof SubmissionsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/advantage'
+    | '/profile'
+    | '/chat/$threadId'
+    | '/submissions/$submissionId'
+    | '/submissions/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/advantage'
+    | '/profile'
+    | '/chat/$threadId'
+    | '/submissions/$submissionId'
+    | '/submissions'
+  id:
+    | '__root__'
+    | '/'
+    | '/advantage'
+    | '/profile'
+    | '/chat/$threadId'
+    | '/submissions/$submissionId'
+    | '/submissions/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdvantageRoute: typeof AdvantageRoute
+  ProfileRoute: typeof ProfileRoute
+  ChatThreadIdRoute: typeof ChatThreadIdRoute
+  SubmissionsSubmissionIdRoute: typeof SubmissionsSubmissionIdRoute
+  SubmissionsIndexRoute: typeof SubmissionsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +117,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/advantage': {
+      id: '/advantage'
+      path: '/advantage'
+      fullPath: '/advantage'
+      preLoaderRoute: typeof AdvantageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/profile': {
+      id: '/profile'
+      path: '/profile'
+      fullPath: '/profile'
+      preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/chat/$threadId': {
+      id: '/chat/$threadId'
+      path: '/chat/$threadId'
+      fullPath: '/chat/$threadId'
+      preLoaderRoute: typeof ChatThreadIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/submissions/': {
+      id: '/submissions/'
+      path: '/submissions'
+      fullPath: '/submissions/'
+      preLoaderRoute: typeof SubmissionsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/submissions/$submissionId': {
+      id: '/submissions/$submissionId'
+      path: '/submissions/$submissionId'
+      fullPath: '/submissions/$submissionId'
+      preLoaderRoute: typeof SubmissionsSubmissionIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdvantageRoute: AdvantageRoute,
+  ProfileRoute: ProfileRoute,
+  ChatThreadIdRoute: ChatThreadIdRoute,
+  SubmissionsSubmissionIdRoute: SubmissionsSubmissionIdRoute,
+  SubmissionsIndexRoute: SubmissionsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
