@@ -16,11 +16,17 @@ type ChatMessage = { id: string; role: "user" | "assistant"; text: string };
 export function Converse({ threadId = "welcome" }: { threadId?: string }) {
   const navigate = useNavigate();
   const inputRef = useRef<HTMLTextAreaElement>(null);
+  const starterIndex = /^thread-([1-3])$/.exec(threadId)?.[1];
+  const starterPrompt = starterIndex ? prompts[Number(starterIndex) - 1] : undefined;
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [newThreadId, setNewThreadId] = useState("new-conversation");
   const [thinking, setThinking] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>([
+  const [messages, setMessages] = useState<ChatMessage[]>(() => [
     { id: "welcome", role: "assistant", text: "Hi Samir — I’m Rami. I can help connect your financial plan with practical support for your business. Where would you like to begin?" },
+    ...(starterPrompt ? [
+      { id: "starter-user", role: "user" as const, text: starterPrompt },
+      { id: "starter-answer", role: "assistant" as const, text: "That’s a useful place to start. I’d look at your goals, current cash flow, and the support programs you may qualify for, then turn those into a short action plan." },
+    ] : []),
   ]);
 
   useEffect(() => {
@@ -41,7 +47,6 @@ export function Converse({ threadId = "welcome" }: { threadId?: string }) {
 
   const startPrompt = (prompt: string, index: number) => {
     navigate({ to: "/chat/$threadId", params: { threadId: `thread-${index + 1}` } });
-    submit({ text: prompt });
   };
 
   return (
