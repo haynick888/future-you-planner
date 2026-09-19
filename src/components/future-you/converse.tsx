@@ -73,7 +73,7 @@ export function Converse({ threadId = "welcome" }: { threadId?: string }) {
                 </MessageContent>
               </Message>
             ))}
-            {messages.length === 1 && <div className="grid gap-2 pt-1">{prompts.map((prompt, index) => <Button key={prompt} variant="outline" onClick={() => startPrompt(prompt, index)} className="h-auto justify-between whitespace-normal border-ice/10 bg-ice/5 px-3 py-3 text-left text-xs leading-relaxed text-ice hover:bg-ice/10 hover:text-ice">{prompt}<span className="ml-2 text-cyan">→</span></Button>)}</div>}
+            {messages.length === 0 && <div className="grid gap-2 pt-1">{prompts.map((prompt, index) => <Button key={prompt} variant="outline" onClick={() => startPrompt(prompt, index)} className="h-auto justify-between whitespace-normal border-ice/10 bg-ice/5 px-3 py-3 text-left text-xs leading-relaxed text-ice hover:bg-ice/10 hover:text-ice">{prompt}<span className="ml-2 text-cyan">→</span></Button>)}</div>}
             {thinking && <Message from="assistant"><MessageContent className="text-slate">Thinking…</MessageContent></Message>}
           </ConversationContent>
           <ConversationScrollButton className="border-ice/15 bg-ink text-cyan" />
