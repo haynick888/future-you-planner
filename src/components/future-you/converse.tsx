@@ -21,13 +21,12 @@ export function Converse({ threadId = "welcome" }: { threadId?: string }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [newThreadId, setNewThreadId] = useState("new-conversation");
   const [thinking, setThinking] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>(() => [
-    { id: "welcome", role: "assistant", text: "Hi Omar — I’m your future self. I can help connect your financial plan with practical support for Prime Movers. Where would you like to begin?" },
-    ...(starterPrompt ? [
+  const [messages, setMessages] = useState<ChatMessage[]>(() =>
+    starterPrompt ? [
       { id: "starter-user", role: "user" as const, text: starterPrompt },
       { id: "starter-answer", role: "assistant" as const, text: "That’s a useful place to start. I’d look at your goals, current cash flow, and the support programs you may qualify for, then turn those into a short action plan." },
-    ] : []),
-  ]);
+    ] : []
+  );
 
   useEffect(() => {
     setNewThreadId(crypto.randomUUID());
@@ -60,11 +59,9 @@ export function Converse({ threadId = "welcome" }: { threadId?: string }) {
         <div className="relative flex min-h-64 flex-col items-center justify-end overflow-hidden border-b border-ice/10 px-5 pb-5 pt-6 text-center">
           <div className="absolute inset-0 bg-gradient-to-b from-cyan/5 to-ink/65" />
           <div className="relative">
-            <img src={adviser} alt="Your future self" width={816} height={816} className="size-40 rounded-lg object-cover object-top shadow-2xl ring-1 ring-ice/15" />
-            <span className="absolute bottom-2 right-2 size-3.5 rounded-full bg-cyan ring-2 ring-ink" />
+            <img src={adviser} alt="Your future self" width={816} height={816} className="size-48 rounded-lg object-cover object-top shadow-2xl ring-1 ring-ice/15" />
           </div>
-          <div className="relative mt-3"><p className="font-display text-base font-semibold">Future You</p><p className="mt-0.5 text-[11px] text-slate">A conversation with who you’re becoming</p></div>
-          <span className="relative mt-2 rounded-full border border-cyan/30 bg-cyan/10 px-2.5 py-1 text-[10px] font-semibold text-cyan">Online</span>
+          <div className="relative mt-3"><p className="font-display text-base font-semibold">Future You</p></div>
         </div>
 
         <Conversation className="min-h-0 flex-1">
@@ -76,7 +73,7 @@ export function Converse({ threadId = "welcome" }: { threadId?: string }) {
                 </MessageContent>
               </Message>
             ))}
-            {messages.length === 1 && <div className="grid gap-2 pt-1">{prompts.map((prompt, index) => <Button key={prompt} variant="outline" onClick={() => startPrompt(prompt, index)} className="h-auto justify-between whitespace-normal border-ice/10 bg-ice/5 px-3 py-3 text-left text-xs leading-relaxed text-ice hover:bg-ice/10 hover:text-ice">{prompt}<span className="ml-2 text-cyan">→</span></Button>)}</div>}
+            {messages.length === 0 && <div className="grid gap-2 pt-1">{prompts.map((prompt, index) => <Button key={prompt} variant="outline" onClick={() => startPrompt(prompt, index)} className="h-auto justify-between whitespace-normal border-ice/10 bg-ice/5 px-3 py-3 text-left text-xs leading-relaxed text-ice hover:bg-ice/10 hover:text-ice">{prompt}<span className="ml-2 text-cyan">→</span></Button>)}</div>}
             {thinking && <Message from="assistant"><MessageContent className="text-slate">Thinking…</MessageContent></Message>}
           </ConversationContent>
           <ConversationScrollButton className="border-ice/15 bg-ink text-cyan" />
