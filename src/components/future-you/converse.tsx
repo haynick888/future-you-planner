@@ -59,11 +59,9 @@ export function Converse({ threadId = "welcome" }: { threadId?: string }) {
         <div className="relative flex min-h-64 flex-col items-center justify-end overflow-hidden border-b border-ice/10 px-5 pb-5 pt-6 text-center">
           <div className="absolute inset-0 bg-gradient-to-b from-cyan/5 to-ink/65" />
           <div className="relative">
-            <img src={adviser} alt="Your future self" width={816} height={816} className="size-40 rounded-lg object-cover object-top shadow-2xl ring-1 ring-ice/15" />
-            <span className="absolute bottom-2 right-2 size-3.5 rounded-full bg-cyan ring-2 ring-ink" />
+            <img src={adviser} alt="Your future self" width={816} height={816} className="size-48 rounded-lg object-cover object-top shadow-2xl ring-1 ring-ice/15" />
           </div>
-          <div className="relative mt-3"><p className="font-display text-base font-semibold">Future You</p><p className="mt-0.5 text-[11px] text-slate">A conversation with who you’re becoming</p></div>
-          <span className="relative mt-2 rounded-full border border-cyan/30 bg-cyan/10 px-2.5 py-1 text-[10px] font-semibold text-cyan">Online</span>
+          <div className="relative mt-3"><p className="font-display text-base font-semibold">Future You</p></div>
         </div>
 
         <Conversation className="min-h-0 flex-1">
