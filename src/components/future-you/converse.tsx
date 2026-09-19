@@ -21,13 +21,12 @@ export function Converse({ threadId = "welcome" }: { threadId?: string }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [newThreadId, setNewThreadId] = useState("new-conversation");
   const [thinking, setThinking] = useState(false);
-  const [messages, setMessages] = useState<ChatMessage[]>(() => [
-    { id: "welcome", role: "assistant", text: "Hi Omar — I’m your future self. I can help connect your financial plan with practical support for Prime Movers. Where would you like to begin?" },
-    ...(starterPrompt ? [
+  const [messages, setMessages] = useState<ChatMessage[]>(() =>
+    starterPrompt ? [
       { id: "starter-user", role: "user" as const, text: starterPrompt },
       { id: "starter-answer", role: "assistant" as const, text: "That’s a useful place to start. I’d look at your goals, current cash flow, and the support programs you may qualify for, then turn those into a short action plan." },
-    ] : []),
-  ]);
+    ] : []
+  );
 
   useEffect(() => {
     setNewThreadId(crypto.randomUUID());
