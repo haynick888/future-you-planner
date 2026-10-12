@@ -3,7 +3,7 @@
 - [x] Replace Converse prompts and align thread labels.
 - [x] Add Tax and Planner pages and five-item navigation.
 - [x] Verify requested screens and navigation.
-- [ ] Rename the account option and add Delete all data to Profile.
-- [ ] Remove the header initials globally.
-- [ ] Update Planner’s icon and page to financial planning.
-- [ ] Verify Profile and Planner updates.
+- [x] Rename the account option and add Delete all data to Profile.
+- [x] Remove the header initials globally.
+- [x] Update Planner’s icon and page to financial planning.
+- [x] Verify Profile and Planner updates.
