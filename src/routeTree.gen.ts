@@ -11,7 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AdvantageRouteImport } from './routes/advantage'
+import { Route as PlannerRouteImport } from './routes/planner'
 import { Route as ProfileRouteImport } from './routes/profile'
+import { Route as TaxRouteImport } from './routes/tax'
 import { Route as ChatThreadIdRouteImport } from './routes/chat.$threadId'
 import { Route as SubmissionsIndexRouteImport } from './routes/submissions.index'
 import { Route as SubmissionsSubmissionIdRouteImport } from './routes/submissions.$submissionId'
@@ -26,9 +28,19 @@ const AdvantageRoute = AdvantageRouteImport.update({
   path: '/advantage',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PlannerRoute = PlannerRouteImport.update({
+  id: '/planner',
+  path: '/planner',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProfileRoute = ProfileRouteImport.update({
   id: '/profile',
   path: '/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TaxRoute = TaxRouteImport.update({
+  id: '/tax',
+  path: '/tax',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ChatThreadIdRoute = ChatThreadIdRouteImport.update({
@@ -50,7 +62,9 @@ const SubmissionsSubmissionIdRoute = SubmissionsSubmissionIdRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/advantage': typeof AdvantageRoute
+  '/planner': typeof PlannerRoute
   '/profile': typeof ProfileRoute
+  '/tax': typeof TaxRoute
   '/chat/$threadId': typeof ChatThreadIdRoute
   '/submissions/$submissionId': typeof SubmissionsSubmissionIdRoute
   '/submissions/': typeof SubmissionsIndexRoute
@@ -58,7 +72,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/advantage': typeof AdvantageRoute
+  '/planner': typeof PlannerRoute
   '/profile': typeof ProfileRoute
+  '/tax': typeof TaxRoute
   '/chat/$threadId': typeof ChatThreadIdRoute
   '/submissions/$submissionId': typeof SubmissionsSubmissionIdRoute
   '/submissions': typeof SubmissionsIndexRoute
@@ -67,7 +83,9 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/advantage': typeof AdvantageRoute
+  '/planner': typeof PlannerRoute
   '/profile': typeof ProfileRoute
+  '/tax': typeof TaxRoute
   '/chat/$threadId': typeof ChatThreadIdRoute
   '/submissions/$submissionId': typeof SubmissionsSubmissionIdRoute
   '/submissions/': typeof SubmissionsIndexRoute
@@ -77,7 +95,9 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/advantage'
+    | '/planner'
     | '/profile'
+    | '/tax'
     | '/chat/$threadId'
     | '/submissions/$submissionId'
     | '/submissions/'
@@ -85,7 +105,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/advantage'
+    | '/planner'
     | '/profile'
+    | '/tax'
     | '/chat/$threadId'
     | '/submissions/$submissionId'
     | '/submissions'
@@ -93,7 +115,9 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/advantage'
+    | '/planner'
     | '/profile'
+    | '/tax'
     | '/chat/$threadId'
     | '/submissions/$submissionId'
     | '/submissions/'
@@ -102,7 +126,9 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdvantageRoute: typeof AdvantageRoute
+  PlannerRoute: typeof PlannerRoute
   ProfileRoute: typeof ProfileRoute
+  TaxRoute: typeof TaxRoute
   ChatThreadIdRoute: typeof ChatThreadIdRoute
   SubmissionsSubmissionIdRoute: typeof SubmissionsSubmissionIdRoute
   SubmissionsIndexRoute: typeof SubmissionsIndexRoute
@@ -124,11 +150,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdvantageRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/planner': {
+      id: '/planner'
+      path: '/planner'
+      fullPath: '/planner'
+      preLoaderRoute: typeof PlannerRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/profile': {
       id: '/profile'
       path: '/profile'
       fullPath: '/profile'
       preLoaderRoute: typeof ProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/tax': {
+      id: '/tax'
+      path: '/tax'
+      fullPath: '/tax'
+      preLoaderRoute: typeof TaxRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/chat/$threadId': {
@@ -158,7 +198,9 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdvantageRoute: AdvantageRoute,
+  PlannerRoute: PlannerRoute,
   ProfileRoute: ProfileRoute,
+  TaxRoute: TaxRoute,
   ChatThreadIdRoute: ChatThreadIdRoute,
   SubmissionsSubmissionIdRoute: SubmissionsSubmissionIdRoute,
   SubmissionsIndexRoute: SubmissionsIndexRoute,
