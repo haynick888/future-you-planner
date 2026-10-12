@@ -8,8 +8,8 @@ import { Menu, Plus, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { AppShell } from "./app-shell";
 
-const prompts = ["How can I grow my business?", "Tell me about small business support programs", "Help me with services beyond financial planning"];
-const threadNames = ["Growing my business", "Business support programs", "Planning beyond finance"];
+const prompts = ["What are the latest available grants for small businesses in NSW?", "I want to learn more about and better navigate the Australian tax system.", "What are potential opportunities to grow my business?"];
+const threadNames = ["Small business grants in NSW", "Navigating Australian tax", "Growing my business"];
 
 type ChatMessage = { id: string; role: "user" | "assistant"; text: string };
 
@@ -44,7 +44,7 @@ export function Converse({ threadId = "welcome" }: { threadId?: string }) {
     }, 700);
   };
 
-  const startPrompt = (prompt: string, index: number) => {
+  const startPrompt = (index: number) => {
     navigate({ to: "/chat/$threadId", params: { threadId: `thread-${index + 1}` } });
   };
 
@@ -73,7 +73,7 @@ export function Converse({ threadId = "welcome" }: { threadId?: string }) {
                 </MessageContent>
               </Message>
             ))}
-            {messages.length === 0 && <div className="grid gap-2 pt-1">{prompts.map((prompt, index) => <Button key={prompt} variant="outline" onClick={() => startPrompt(prompt, index)} className="h-auto justify-between whitespace-normal border-ice/10 bg-ice/5 px-3 py-3 text-left text-xs leading-relaxed text-ice hover:bg-ice/10 hover:text-ice">{prompt}<span className="ml-2 text-cyan">→</span></Button>)}</div>}
+            {messages.length === 0 && <div className="grid gap-2 pt-1">{prompts.map((prompt, index) => <Button key={prompt} variant="outline" onClick={() => startPrompt(index)} className="h-auto justify-between whitespace-normal border-ice/10 bg-ice/5 px-3 py-3 text-left text-xs leading-relaxed text-ice hover:bg-ice/10 hover:text-ice">{prompt}<span className="ml-2 text-cyan">→</span></Button>)}</div>}
             {thinking && <Message from="assistant"><MessageContent className="text-slate">Thinking…</MessageContent></Message>}
           </ConversationContent>
           <ConversationScrollButton className="border-ice/15 bg-ink text-cyan" />
