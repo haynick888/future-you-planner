@@ -1,12 +1,12 @@
 import { Link, useRouterState } from "@tanstack/react-router";
-import { BotMessageSquare, CalendarDays, Gift, ReceiptText, UserRound } from "lucide-react";
+import { BotMessageSquare, ChartNoAxesCombined, Gift, ReceiptText, UserRound } from "lucide-react";
 import type { ReactNode } from "react";
 
 const navItems = [
   { to: "/" as const, label: "Converse", icon: BotMessageSquare, match: (path: string) => path === "/" || path.startsWith("/chat/") },
   { to: "/advantage" as const, label: "Advantage", icon: Gift, match: (path: string) => path.startsWith("/advantage") || path.startsWith("/submissions") },
   { to: "/tax" as const, label: "Tax", icon: ReceiptText, match: (path: string) => path.startsWith("/tax") },
-  { to: "/planner" as const, label: "Planner", icon: CalendarDays, match: (path: string) => path.startsWith("/planner") },
+  { to: "/planner" as const, label: "Planner", icon: ChartNoAxesCombined, match: (path: string) => path.startsWith("/planner") },
   { to: "/profile" as const, label: "Profile", icon: UserRound, match: (path: string) => path.startsWith("/profile") },
 ];
 
@@ -24,7 +24,6 @@ export function AppShell({ children, title, eyebrow }: { children: ReactNode; ti
             <p className="font-display text-[11px] font-semibold uppercase tracking-[0.28em] text-cyan">{eyebrow ?? "Future You"}</p>
             <h1 className="mt-1 font-display text-2xl font-semibold tracking-normal">{title}</h1>
           </div>
-          <div className="grid size-11 place-items-center rounded-lg border border-ice/15 bg-ice/10 font-display text-sm font-semibold backdrop-blur-xl">OM</div>
         </header>
         <div className="flex min-h-0 flex-1 flex-col pb-20">{children}</div>
         <nav className="fixed inset-x-0 bottom-0 z-30 mx-auto max-w-md border-t border-ice/10 bg-ink/85 backdrop-blur-xl" aria-label="Main navigation">
