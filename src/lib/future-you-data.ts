@@ -22,7 +22,7 @@ export const submissions = [
     submitted: "8 September 2026",
     updated: "16 September 2026",
     amount: "$2,940 estimated saving",
-    next: "Eligibility review expected by 24 September",
+    next: "Eligibility review expected by 30 October",
     detail: "Your vehicle purchase invoice and business registration have been verified. The assessing team is now confirming vehicle eligibility.",
   },
   {
