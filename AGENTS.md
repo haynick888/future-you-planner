@@ -8,3 +8,6 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Keep top-level Future You views as TanStack file routes sharing AppShell so navigation and active states remain consistent.
+- Uploaded app imagery uses Lovable Assets JSON pointers so binary uploads stay outside the source repository.
